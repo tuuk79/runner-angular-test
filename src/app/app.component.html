@@ -17,3 +17,36 @@
     <li *ngFor="let step of requirements">{{step}}</li>
   </ul>
 </div>
+
+<div id="solution">
+	<form class="example-form" (ngSubmit)="onSubmit()">
+		<mat-form-field class="example-full-width" appearance="fill">
+			<mat-label>Title</mat-label>
+			<input type="text"
+						 placeholder="Pick one"
+						 aria-label="Title"
+						 matInput
+						 [formControl]="myAutoComplete"
+						 [matAutocomplete]="auto"
+						 (keyup)="showPanel(userinput.value)"
+						 (click)="showPanel(userinput.value)"
+						 #userinput>
+			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event.option.value)" panelWidth="600">
+				<mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+					{{option.name}}
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
+		<button class="button" type="submit">SAVE</button>
+	</form>
+
+	<textarea name="" id="" cols="60" rows="10">{{ selected?.full_name }}</textarea>
+
+	<div>
+		<label>Database Entries</label>
+		<div *ngFor="let entry of dbEntries">{{ entry.full_name }}</div>
+	</div>
+</div>
+
+
+
